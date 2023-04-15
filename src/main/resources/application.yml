@@ -1,0 +1,30 @@
+#\u7AEF\u53E3
+server:
+  port: 81
+
+#\u6570\u636E\u6E90
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///travel?serverTimezone=UTC
+    username: root
+    password: 1234
+
+#\u914D\u7F6Emybatis-plus
+mybatis-plus:
+  global-config:
+    db-config:
+      #\u4E3B\u952E\u751F\u6210\u7B56\u7565\uFF1A\u81EA\u589E
+      id-type: auto
+  configuration:
+    # \u5173\u95ED\u5217\u540D\u81EA\u52A8\u9A7C\u5CF0\u547D\u540D\u89C4\u5219\u6620\u5C04
+    map-underscore-to-camel-case: false
+    # \u5F00\u542FSQL\u65E5\u5FD7
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # \u65E5\u5FD7\u683C\u5F0F
+    logging:
+      pattern:
+        console: '%d{HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'
+
+
+
