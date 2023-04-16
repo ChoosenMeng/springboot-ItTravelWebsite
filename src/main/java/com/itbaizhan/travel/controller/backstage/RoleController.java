@@ -71,5 +71,13 @@ public class RoleController {
         return modelAndView;
     }
 
+    //给角色重新分配权限
+    @RequestMapping("/updatePermission")
+    public String managePermission(Integer rid,Integer[] ids){
+        roleService.updatePermissions(rid,ids);
+        return "redirect:/backstage/role/all";
+    }
+
+
 
 }
