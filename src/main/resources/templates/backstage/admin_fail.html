@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录失败</title>
+    <th:block th:replace="/backstage/common_resources::common_css"></th:block>
+    <th:block th:replace="/backstage/common_resources::common_js"></th:block>
+</head>
+<body>
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+
+        <ol class="breadcrumb">
+            <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">账号或密码错误</li>
+        </ol>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="error-page">
+            <h2 class="headline text-red">ERROR</h2>
+
+            <div>
+                <h3><i class="fa fa-warning text-red"></i> Oops! 账号或密码有错误.</h3>
+
+                <p>
+                    你的账号或密码有错误, 你可以 <a href="/backstage/admin_login">尝试重新登录</a>
+                </p>
+            </div>
+            <!-- /.error-content -->
+        </div>
+        <!-- /.error-page -->
+    </section>
+    <!-- /.content -->
+</div>
+</body>
+</html>

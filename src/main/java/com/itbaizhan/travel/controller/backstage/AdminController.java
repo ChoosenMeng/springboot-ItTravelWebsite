@@ -52,7 +52,6 @@ public class AdminController {
         return "redirect:/backstage/admin/all";
     }
 
-
     @RequestMapping("/desc")
     public ModelAndView desc(Integer aid){
         Admin admin = adminService.findDesc(aid);
@@ -87,6 +86,4 @@ public class AdminController {
 
         return "redirect:/backstage/admin/all";
     }
-
-
 }

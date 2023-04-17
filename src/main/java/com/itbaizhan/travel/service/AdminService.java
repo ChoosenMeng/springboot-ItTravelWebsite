@@ -1,11 +1,13 @@
 package com.itbaizhan.travel.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itbaizhan.travel.bean.RoleWithStatus;
 import com.itbaizhan.travel.mapper.AdminMapper;
 import com.itbaizhan.travel.mapper.RoleMapper;
 import com.itbaizhan.travel.pojo.Admin;
 import com.itbaizhan.travel.pojo.Role;
+import com.mysql.cj.QueryResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,5 +87,12 @@ public class AdminService {
         adminMapper.updateById(admin);
     }
 
+    //根据名字查询管理员
+    public Admin findByAdminName(String username){
+        QueryWrapper<Admin> wrapper = new QueryWrapper();
+        wrapper.eq("username",username);
+        Admin admin = adminMapper.selectOne(wrapper);
+        return admin;
+    }
 }
 
