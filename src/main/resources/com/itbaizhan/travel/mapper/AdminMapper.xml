@@ -42,5 +42,19 @@
         values (#{aid}, #{rid})
     </insert>
 
+    <select id="findAllPermission" resultType="com.itbaizhan.travel.pojo.Permission" parameterType="string">
+        SELECT DISTINCT permission.*
+        FROM admin
+                 LEFT JOIN admin_role
+                           ON admin.aid = admin_role.aid
+                 LEFT JOIN role
+                           ON admin_role.rid = role.rid
+                 LEFT JOIN role_permission
+                           ON role.rid = role_permission.rid
+                 LEFT JOIN permission
+                           ON role_permission.pid = permission.pid
+        WHERE admin.username = #{username}
+          AND permission.pid is not null
+    </select>
 
 </mapper>

@@ -6,6 +6,7 @@ import com.itbaizhan.travel.bean.RoleWithStatus;
 import com.itbaizhan.travel.mapper.AdminMapper;
 import com.itbaizhan.travel.mapper.RoleMapper;
 import com.itbaizhan.travel.pojo.Admin;
+import com.itbaizhan.travel.pojo.Permission;
 import com.itbaizhan.travel.pojo.Role;
 import com.mysql.cj.QueryResult;
 import org.springframework.beans.BeanUtils;
@@ -93,6 +94,11 @@ public class AdminService {
         wrapper.eq("username",username);
         Admin admin = adminMapper.selectOne(wrapper);
         return admin;
+    }
+
+    // 根据名字查询权限
+    public List<Permission> findAllPermission(String username) {
+        return adminMapper.findAllPermission(username);
     }
 }
 
