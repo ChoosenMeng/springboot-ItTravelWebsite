@@ -1,4 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <aside class="main-sidebar" th:fragment="aside">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -31,21 +33,21 @@
           </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li id="admin">
+                    <li id="admin" sec:authorize="hasAnyAuthority('/admin/all')">
                         <a href="/backstage/admin/all">
                             <i class="fa fa-circle-o"></i>用户管理
                         </a>
                     </li>
 
 
-                    <li id="role">
+                    <li id="role" sec:authorize="hasAnyAuthority('/role/all')">
                         <a href="/backstage/role/all">
                             <i class="fa fa-circle-o"></i>角色管理
                         </a>
                     </li>
 
 
-                    <li id="permission">
+                    <li id="permission" sec:authorize="hasAnyAuthority('/permission/all')">
                         <a href="/backstage/permission/all">
                             <i class="fa fa-circle-o"></i>权限管理
                         </a>

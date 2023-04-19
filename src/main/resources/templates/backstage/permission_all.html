@@ -41,7 +41,7 @@
             <div class="pull-left">
               <div class="form-group form-inline">
                 <div class="btn-group">
-                  <a th:href="@{/backstage/permission_add}">
+                  <a th:href="@{/backstage/permission_add}" sec:authorize="hasAnyAuthority('/permission/add')">
                     <button type="button" class="btn btn-default" title="新建"
                             sec:authorize="hasAnyAuthority('/permission/add')">
                       <i class="fa fa-file-o"></i> 新建
