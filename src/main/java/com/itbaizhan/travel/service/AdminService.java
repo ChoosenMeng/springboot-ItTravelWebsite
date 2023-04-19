@@ -11,6 +11,7 @@ import com.itbaizhan.travel.pojo.Role;
 import com.mysql.cj.QueryResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class AdminService {
     private AdminMapper adminMapper;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     // 分页查询管理员
     public Page<Admin> findPage(int page, int size){
@@ -29,8 +32,9 @@ public class AdminService {
         return selectPage;
     }
 
-    //新增管理员
+    // 新增管理员
     public void add(Admin admin){
+        admin.setPassword(encoder.encode(admin.getPassword()));
         adminMapper.insert(admin);
     }
 
@@ -39,8 +43,17 @@ public class AdminService {
         return adminMapper.selectById(aid);
     }
 
-    //修改管理员
-    public void update(Admin admin){
+    // 修改管理员
+    public void update(Admin admin) {
+        // 旧密码
+        String oldPassword = adminMapper.selectById(admin.getAid()).getPassword();
+        // 新密码
+        String newPassword = admin.getPassword();
+
+        // 如果新密码不等于旧密码，对新密码进行加密
+        if (!oldPassword.equals(newPassword)){
+            admin.setPassword(encoder.encode(newPassword));
+        }
         adminMapper.updateById(admin);
     }
 
