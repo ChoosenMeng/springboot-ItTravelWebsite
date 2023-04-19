@@ -24,5 +24,4 @@ public class Product {
     private Integer cid; // 产品类型id
     @TableField(exist = false)// 不是数据库的字段
     private Category category; // 产品类型
-
 }

@@ -8,7 +8,6 @@ import com.itbaizhan.travel.mapper.RoleMapper;
 import com.itbaizhan.travel.pojo.Admin;
 import com.itbaizhan.travel.pojo.Permission;
 import com.itbaizhan.travel.pojo.Role;
-import com.mysql.cj.QueryResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
