@@ -75,7 +75,7 @@
                 <td th:text="${product.category.cname }"></td>
                 <td class="text-center">
                   <a th:href="@{/backstage/product/edit(pid=${product.pid})}" class="btn bg-olive btn-xs">修改</a>
-                  <a th:href="@{/backstage/product/updateStatus(pid=${product.pid})}" class="btn bg-gray btn-xs">开启/关闭</a>
+                  <a th:href="@{/backstage/product/updateStatus(pid=${product.pid})}" class="btn bg-gray btn-xs">上架/下架</a>
                 </td>
               </tr>
               </tbody>

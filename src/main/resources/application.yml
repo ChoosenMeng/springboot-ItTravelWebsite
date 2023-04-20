@@ -1,16 +1,22 @@
-#\u7AEF\u53E3
+#配置服务器端口
 server:
   port: 81
 
-#\u6570\u636E\u6E90
+#spring配置
 spring:
+  #配置数据源
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql:///travel?serverTimezone=UTC
     username: root
     password: 1234
+  # 上传文件
+  servlet:
+    multipart:
+      max-file-size: 10MB # 最大单个文件
+      max-request-size: 10MB # 一次请求最大上传
 
-#\u914D\u7F6Emybatis-plus
+#配置mybatis-plus
 mybatis-plus:
   global-config:
     db-config:

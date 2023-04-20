@@ -21,5 +21,17 @@ public class ProductService {
         productMapper.insert(product);
     }
 
-}
+    public Product findOne(int pid){
+        return productMapper.findOne(pid);
+    }
 
+    public void update(Product product){
+        productMapper.updateById(product);
+    }
+
+    public void updateStatus(Integer pid){
+        Product product = productMapper.selectById(pid);
+        product.setStatus(!product.getStatus());
+        productMapper.updateById(product);
+    }
+}

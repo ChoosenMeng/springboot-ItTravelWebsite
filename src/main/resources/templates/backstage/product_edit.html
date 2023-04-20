@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>新增旅游产品</title>
+  <title>修改旅游产品</title>
   <th:block th:replace="/backstage/common_resources::common_css"></th:block>
   <th:block th:replace="/backstage/common_resources::common_js"></th:block>
 </head>
@@ -14,12 +14,12 @@
     <section class="content-header">
       <h1>
         旅游产品管理
-        <small>新增旅游产品</small>
+        <small>修改旅游产品</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="@{/backstage/index}"><i class="fa fa-dashboard"></i> 首页</a></li>
         <li><a href="@{/backstage/product/all}">旅游产品管理</a></li>
-        <li class="active">新增旅游产品</li>
+        <li class="active">修改旅游产品</li>
       </ol>
     </section>
     <!-- 内容头部 /-->
@@ -53,30 +53,32 @@
             })
           </script>
           <div class="col-md-2 data" style="height: 110px">
-            <img height="100" th:src="@{/backstage/img/no-img.png}" id="pImage">
+            <img height="100" th:src="${product.pImage}" id="pImage">
           </div>
-          <form th:action="@{/backstage/product/add}" method="post">
+          <form th:action="@{/backstage/product/update}" method="post">
             <input type="hidden" name="pImage" id="hiddenPImage">
+            <input type="hidden" name="pid" th:value="${product.pid}">
 
           <div class="col-md-2 title">产品名称</div>
           <div class="col-md-4 data">
-            <input type="text" class="form-control" placeholder="产品名称" name="productName">
+            <input type="text" class="form-control" placeholder="产品名称" th:value="${product.productName}" name="productName">
           </div>
           <div class="col-md-2 title">产品类型</div>
           <div class="col-md-4 data">
             <select class="form-control" name="cid">
               <option th:each="category:${categoryList}"
                       th:value="${category.cid}"
-                      th:text="${category.cname}"></option>
+                      th:text="${category.cname}"
+              th:selected="${category.cid eq product.cid}"></option>
             </select>
           </div>
           <div class="col-md-2 title">价格</div>
           <div class="col-md-4 data">
-            <input type="number" class="form-control" placeholder="价格" name="price">
+            <input type="number" class="form-control"  th:value="${product.price}" name="price">
           </div>
           <div class="col-md-2 title">热线电话</div>
           <div class="col-md-4 data">
-            <input type="text" class="form-control" placeholder="热线电话" name="hotline" value="">
+            <input type="text" class="form-control" th:value="${product.hotline}" name="hotline" value="">
           </div>
           <div class="col-md-2 title">状态</div>
           <div class="col-md-4 data">
@@ -88,7 +90,7 @@
           <div class="col-md-6 data"></div>
           <div class="col-md-2 title" style="height: 350px">产品详情</div>
           <div class="col-md-10 data" style="height: 350px">
-            <div id="div1"></div>
+            <div id="div1" th:utext="${product.productDesc}"></div>
             <textarea id="text1" style="width:100%; height:100px;" name="productDesc" hidden></textarea>
             <script>
               const E = window.wangEditor;

@@ -23,5 +23,12 @@
             LEFT JOIN category ON product.cid = category.cid
         ORDER BY product.pid DESC
     </select>
+
+    <select id="findOne" resultMap="productMapper">
+        SELECT *
+        FROM product
+                 LEFT JOIN category ON product.cid = category.cid
+        WHERE pid = #{pid}
+    </select>
 </mapper>
 
