@@ -8,6 +8,7 @@ import com.itbaizhan.travel.mapper.RoleMapper;
 import com.itbaizhan.travel.pojo.Admin;
 import com.itbaizhan.travel.pojo.Product;
 import com.itbaizhan.travel.service.AdminService;
+import com.itbaizhan.travel.util.MailUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,8 @@ class TravelApplicationTests {
     private RoleMapper roleMapper;
     @Autowired
     private ProductMapper productMapper;
+    @Autowired
+    private MailUtils mailUtils;
     @Test
     void contextLoads() {
 //        Page<Admin> page = adminService.findPage(1,5);
@@ -32,8 +35,8 @@ class TravelApplicationTests {
 //        System.out.println(desc);
 //        List<RoleWithStatus> role = adminService.findRole(1);
 //        System.out.println(role);
-        Page<Product> productPage = productMapper.findProductPage(new Page(1,5));
-        System.out.println(productPage);
+//        Page<Product> productPage = productMapper.findProductPage(new Page(1,5));
+//        System.out.println(productPage);
+        mailUtils.sendMail("mmengcx@foxmail.com","这是一封测试邮件","测试");
     }
-
 }
