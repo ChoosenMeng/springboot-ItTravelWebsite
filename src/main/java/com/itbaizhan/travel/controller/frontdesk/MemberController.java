@@ -36,4 +36,15 @@ public class MemberController {
         }
         return modelAndView;
     }
+
+    //激活
+    @RequestMapping("/active")
+    public ModelAndView active(String activeCode) {
+        ModelAndView modelAndView = new ModelAndView();
+        String active = memberService.active(activeCode);
+        modelAndView.addObject("message",active);
+        modelAndView.setViewName("/frontdesk/active_result");
+        return modelAndView;
+    }
+
 }

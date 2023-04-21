@@ -39,3 +39,7 @@ mail:
   #发件人密码
   password: QKPLVHPHVGINZRHL
 
+#项目路径
+project:
+  path: http:localhost:81
+
