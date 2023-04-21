@@ -56,17 +56,7 @@
 .rg_form > .rg_form_center .td_right{
 	width: 293px;
 }
-.rg_form_center .td_right > input[type="text"],.rg_form_center .td_right > input[type="date"]{
-	width: 256px;
-	height: 32px;
-	line-height: 32px;
-	box-sizing: border-box;
-	padding: 6px 12px;
-	border-radius: 4px;
-	border:1px solid #a6a6a6;
-	float: right;
-}
-.rg_form_center .td_right > input[type="password"],.rg_form_center .td_right > input[type="date"]{
+.rg_form_center .td_right > input[type="text"],.rg_form_center .td_right > input[type="date"],.rg_form_center .td_right > input[type="password"]{
 	width: 256px;
 	height: 32px;
 	line-height: 32px;
