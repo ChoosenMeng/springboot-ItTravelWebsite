@@ -32,5 +32,10 @@ mybatis-plus:
       pattern:
         console: '%d{HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'
 
-
+#发送邮件配置
+mail:
+  #发件人地址
+  user: mengchuxuanneusoft@163.com
+  #发件人密码
+  password: QKPLVHPHVGINZRHL
 
