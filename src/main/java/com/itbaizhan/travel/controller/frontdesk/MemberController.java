@@ -47,4 +47,24 @@ public class MemberController {
         return modelAndView;
     }
 
+    @RequestMapping("/login")
+    public ModelAndView register(String name,String password,HttpSession session){
+        ModelAndView modelAndView = new ModelAndView();
+        Result result = memberService.login(name,password);
+        if(!result.isFlag()){ // 登录失败
+            modelAndView.addObject("message",result.getMessage());
+            modelAndView.setViewName("/frontdesk/login");
+        }else{ // 登录成功
+            session.setAttribute("member",result.getData()); // 将用户信息存入session
+            modelAndView.setViewName("redirect:/frontdesk/index");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("member");
+        return "redirect:/frontdesk/index";
+    }
+
 }
