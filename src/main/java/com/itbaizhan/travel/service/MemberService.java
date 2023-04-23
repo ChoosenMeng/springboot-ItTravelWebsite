@@ -5,7 +5,6 @@ import com.itbaizhan.travel.bean.Result;
 import com.itbaizhan.travel.mapper.MemberMapper;
 import com.itbaizhan.travel.pojo.Member;
 import com.itbaizhan.travel.util.MailUtils;
-import com.sun.mail.imap.protocol.FLAGS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -131,6 +130,5 @@ public class MemberService {
             return new Result(false,"用户未激活");
         return new Result(true,"登录成功",member);
     }
-
 
 }
