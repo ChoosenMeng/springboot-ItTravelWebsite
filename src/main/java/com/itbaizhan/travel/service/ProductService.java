@@ -1,11 +1,13 @@
 package com.itbaizhan.travel.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itbaizhan.travel.mapper.ProductMapper;
 import com.itbaizhan.travel.pojo.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Service
 @Transactional
@@ -36,4 +38,23 @@ public class ProductService {
         product.setStatus(!product.getStatus());
         productMapper.updateById(product);
     }
+
+    public Page<Product> findProduct(Integer cid,String productName,int page, int size){
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        if (cid != null){
+            queryWrapper.eq("cid",cid);
+        }
+        if (StringUtils.hasText(productName)){
+            queryWrapper.like("productName",productName);
+        }
+        // 还在启用的旅游产品
+        queryWrapper.eq("status",1);
+        // 倒序排列
+        queryWrapper.orderByDesc("pid");
+
+
+        Page selectPage = productMapper.selectPage(new Page(page,size),queryWrapper);
+        return selectPage;
+    }
+
 }
