@@ -26,9 +26,6 @@
 <body>
 <!--引入头部-->
 <header th:replace="~{/frontdesk/header::header}"></header>
-<div th:if="${session.member} != null">
-    <audio src="/frontdesk/media/frontdesk.mp3" autoplay hidden></audio>
-</div>
 <!-- banner start-->
 <section id="banner">
     <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel"
