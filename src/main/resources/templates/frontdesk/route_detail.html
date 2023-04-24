@@ -36,10 +36,16 @@
             <div class="info">
                 <p class="price">¥<span th:text="${product.price}"></span>起</p>
                 <p class="hotline">咨询电话:<span th:text="${product.hotline}"></span></p>
+
                 <div class="opera">
-                    <button class="btn btn-danger"><i style="vertical-align:middle;margin-right:5px" class="glyphicon glyphicon-heart-empty"></i>点击收藏</button>
-                    <button class="btn already"><i style="vertical-align:middle;margin-right:5px" class="glyphicon glyphicon-heart-empty"></i>取消收藏</button>
+                    <a th:href="@{/frontdesk/favorite/add(pid=${product.pid})}" th:if="!${favorite}">
+                        <button class="btn btn-danger"><i style="vertical-align:middle;margin-right:5px" class="glyphicon glyphicon-heart-empty"></i>点击收藏</button>
+                    </a>
+                    <a th:href="@{/frontdesk/favorite/del(pid=${product.pid})}" th:if="${favorite}">
+                        <button class="btn already"><i style="vertical-align:middle;margin-right:5px" class="glyphicon glyphicon-heart-empty"></i>取消收藏</button>
+                    </a>
                 </div>
+
             </div>
             <div class="discount">
                 <span>优惠活动：使用信用卡支付立减100</span>

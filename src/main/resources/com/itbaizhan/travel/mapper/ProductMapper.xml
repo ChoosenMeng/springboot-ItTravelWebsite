@@ -30,5 +30,29 @@
                  LEFT JOIN category ON product.cid = category.cid
         WHERE pid = #{pid}
     </select>
+
+    <select id="findFavoritePidAndMid" resultType="int">
+        SELECT COUNT(*)
+        FROM favorite
+        where pid = #{pid}
+          AND mid = #{mid}
+    </select>
+
+    <insert id="addFavorite">
+        INSERT INTO favorite(pid,mid) values(#{pid},#{mid})
+    </insert>
+
+    <delete id="delFavorite">
+        DELETE from favorite where pid=#{pid} and mid=#{mid}
+    </delete>
+
+    <select id="findMemberFavorite" parameterType="int" resultType="com.itbaizhan.travel.pojo.Product">
+        SELECT product.*
+        FROM product LEFT JOIN favorite
+                           on product.pid = favorite.pid
+        WHERE favorite.mid = #{mid}
+    </select>
+
+
 </mapper>
 

@@ -1,7 +1,9 @@
 package com.itbaizhan.travel.controller.frontdesk;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.itbaizhan.travel.pojo.Member;
 import com.itbaizhan.travel.pojo.Product;
+import com.itbaizhan.travel.service.FavoriteService;
 import com.itbaizhan.travel.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/frontdesk/product")
 public class FrontdeskProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private FavoriteService favoriteService;
 
     /**
      * 查询旅游线路
@@ -40,14 +46,22 @@ public class FrontdeskProductController {
 
     // 线路详情
     @RequestMapping("/routeDetail")
-    public ModelAndView findOne(Integer pid){
+    public ModelAndView findOne(Integer pid, HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         Product product = productService.findOne(pid);
 
+        // 查询用户是否收藏该线路
+        Object member = session.getAttribute("member");
+        if (member == null){ // 未登录认为未收藏
+            modelAndView.addObject("favorite",false);
+        }else { // 已登录查询是否收藏
+            Member member1 = (Member) member;
+            boolean favorite = favoriteService.findFavorite(pid, member1.getMid());
+            modelAndView.addObject("favorite",favorite);
+        }
         modelAndView.addObject("product",product);
         modelAndView.setViewName("/frontdesk/route_detail");
         return modelAndView;
     }
-
 }
 

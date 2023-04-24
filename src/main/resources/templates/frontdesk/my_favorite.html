@@ -1,69 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的收藏</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" href="css/faviorite.css">
-    <script src="js/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="/frontdesk/css/common.css">
+    <link rel="stylesheet" href="/frontdesk/css/faviorite.css">
+    <script src="/frontdesk/js/jquery-3.3.1.js"></script>
+    <script src="/frontdesk/js/bootstrap.js"></script>
+    <script src="/frontdesk/js/bootstrap-paginator.js"></script>
 </head>
 <body>
-    <!--引入头部-->
-    <div id="header"></div>
-    <div class="page_one">
-        <div class="contant">
-            <div class="left">
-                <ul>
-                    <li>
-                        <img src="images/04-search_03.jpg" alt="">
-                        <div class="content">
-                            <p class="title">
-                                山西五台山2日1晚跟团游
+<!--引入头部-->
+<header th:replace="~{/frontdesk/header::header}"></header>
+<div class="page_one">
+    <div class="contant">
+        <div class="left">
+            <ul>
+                <li th:each="product : ${productPage.records}">
+                    <img th:src="${product.pImage}" height="100">
+                    <div class="contents">
+                        <p class="title" th:text="${product.productName}"></p>
+                        <div>
+                            <p class="price_num">
+                                <span>¥</span>
+                                <span th:text="${product.price}">299</span>
+                                <span>起</span>
                             </p>
-                            <div>
-                                <p class="price_num">
-                                    <span>&yen;</span>
-                                    <span>299</span>
-                                    <span>起</span>
-                                </p>
-                                <p class="details">
-                                    <a href="#">查看详情</a>
-                                </p>
-                            </div>
+                            <p class="details">
+                                <a th:href="@{/frontdesk/product/routeDetail(pid=${product.pid})}">查看详情</a>
+                            </p>
                         </div>
-                    </li>
-                </ul>
-                <div class="pageNum">
-                    <ul>
-                        <li><a href="">首页</a></li>
-                        <li class="threeword"><a href="#">上一页</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">10</a></li>
-                        <li class="threeword"><a href="javascript:;">下一页</a></li>
-                        <li class="threeword"><a href="javascript:;">末页</a></li>
-                    </ul>
-                </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="pageNum">
+                <ul class="pagination"></ul>
             </div>
-         
         </div>
     </div>
-    </div>
-
-    <!--引入头部-->
-    <div id="footer"></div>
-    <!--导入布局js，共享header和footer-->
-    <script type="text/javascript" src="js/include.js"></script>
+</div>
+</div>
+<!--引入尾部-->
+<footer th:replace="~{/frontdesk/footer::footer}"></footer>
 </body>
-
+<script>
+    $(function () {
+        var currentPage = [[${productPage.current}]]; // 当前页
+        var pages = [[${productPage.pages}]]; // 总页数
+        // 分页插件
+        $('.pagination').bootstrapPaginator({
+            bootstrapMajorVersion: 3, // bootstrap版本
+            currentPage: currentPage, // 当前页
+            totalPages: pages, // 总页数
+            numberOfPages: 10, // 最多显示多少页
+            itemTexts: function (type, page, current) { // 配置自定义文本
+                switch (type) {
+                    case "first":
+                        return "首页";
+                    case "prev":
+                        return "<<";
+                    case "next":
+                        return ">>";
+                    case "last":
+                        return "尾页";
+                    case "page":
+                        return page;
+                }
+            },
+            onPageClicked: function (event, originalEvent, type, page) { // 点击页码执行的方法
+                location.href = "/frontdesk/favorite/myFavorite?page=" + page;
+            }
+        });
+    })
+</script>
 </html>
